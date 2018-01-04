@@ -1,0 +1,28 @@
+{
+  "name": "esports-club-theme",
+  "version": "1.0.0",
+  "description": "A underscores based gaming theme",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.iu.edu/clwjones/gamersHall"
+  },
+  "keywords": [
+    "esports",
+    "wordpress",
+    "theme"
+  ],
+  "author": "Clinton Jones",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt-contrib-sass": "^1.0.0"
+  },
+  "dependencies": {
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

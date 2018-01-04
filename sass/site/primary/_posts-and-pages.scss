@@ -1,0 +1,49 @@
+.sticky {
+	display: block;
+}
+
+.hentry {
+	margin: 0 0 1.5em;
+}
+
+.updated:not(.published) {
+	display: none;
+}
+
+.page-content,
+.entry-content,
+.entry-summary {
+
+}
+
+.entry-title {
+	font-weight:bold;
+	position:relative;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 20px;
+  border: 0 solid;
+  border-bottom: 5px solid rgb(169,5,51);
+  font: normal 4em "raleway", Helvetica, sans-serif;
+  color: #ffffff;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: #181319;
+	margin:0!important;
+}
+.entry-meta,.cat-links {
+	font-style:italic;
+	margin:1em;
+
+}
+
+.edit-link {
+	margin:1em;
+}
+
+
+.page-links {
+	clear: both;
+	margin: 0 0 1.5em;
+}
