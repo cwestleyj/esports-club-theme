@@ -260,17 +260,6 @@ th {
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
-body,
-button,
-input,
-select,
-optgroup,
-textarea {
-	color: #404040;
-	font-family: "Merriweather", "Lucida Grande", Geneva, Arial, serif;
-	line-height: 1.5;
-}
-
 h1, h2, h3, h4, h5, h6 {
 	clear: both;
 	font-family: "Raleway", Verdana, Georgia, sans-serif;
@@ -279,11 +268,12 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
 	font-size: 3em;
 	margin: 0.5em 0 0 0.5em;
+	padding: 1rem;
 }
 
 h2 {
 	font-size: 2em;
-	margin: 0.5em 0 0 0.5em;
+	padding: 1.5rem;
 }
 
 p {
@@ -349,7 +339,7 @@ html {
 }
 
 body {
-	background: eggplant;
+	background: #ffffff;
 	/* Fallback for when there is no custom background color defined. */
 	margin: 0;
 }
@@ -361,22 +351,12 @@ hr {
 	margin-bottom: 1.5em;
 }
 
-ul, ol {
-	margin: 0 0 1.5em 3em;
-}
-
 ul {
 	list-style: disc;
 }
 
 ol {
 	list-style: decimal;
-}
-
-li > ul,
-li > ol {
-	margin-bottom: 0;
-	margin-left: 1.5em;
 }
 
 dt {
@@ -399,15 +379,38 @@ button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-	border: 1px solid;
-	border-color: #ccc #ccc #bbb;
-	border-radius: 3px;
-	background: #e6e6e6;
-	color: rgba(0, 0, 0, 0.8);
-	font-size: 15px !important;
-	font-size: 0.9375rem !important;
-	line-height: 1;
-	padding: .6em 1em .4em;
+	box-shadow: 0px 1px 0px 0px #9fb4f2;
+	background: linear-gradient(to bottom, #cc4242 5%, #e62525 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc4242', endColorstr='#e62525',GradientType=0);
+	background-color: #cc4242;
+	border-radius: 6px;
+	border: 1px solid #4e6096;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 6px 24px;
+	text-decoration: none;
+	text-shadow: 0px -1px 0px #283966;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+	background: linear-gradient(to bottom, #e62525 5%, #cc4242 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e62525', endColorstr='#cc4242',GradientType=0);
+	background-color: #e62525;
+}
+
+button:active,
+input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active {
+	position: relative;
+	top: 1px;
 }
 
 button:hover,
@@ -425,6 +428,16 @@ input[type="reset"]:focus,
 input[type="submit"]:active,
 input[type="submit"]:focus {
 	border-color: #aaa #bbb #bbb;
+}
+
+input#signup_submit {
+	height: 6rem;
+	width: auto;
+}
+
+#buddypress .standard-form#signup_form div.submit {
+	float: none;
+	text-align: center;
 }
 
 input[type="text"],
@@ -483,15 +496,11 @@ textarea {
 ## Links
 --------------------------------------------------------------*/
 a {
-	color: royalblue;
-}
-
-a:visited {
-	color: purple;
+	color: #0093ff;
 }
 
 a:hover, a:focus, a:active {
-	color: midnightblue;
+	color: #ffa100;
 }
 
 a:focus {
@@ -505,94 +514,6 @@ a:hover, a:active {
 /*--------------------------------------------------------------
 ## Menus
 --------------------------------------------------------------*/
-.main-navigation {
-	clear: both;
-	display: block;
-	float: left;
-	width: 100%;
-}
-
-.main-navigation ul {
-	display: none;
-	list-style: none;
-	margin: 0;
-	padding-left: 0;
-}
-
-.main-navigation ul ul {
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-	float: left;
-	position: absolute;
-	top: 100%;
-	left: -999em;
-	z-index: 99999;
-}
-
-.main-navigation ul ul ul {
-	left: -999em;
-	top: 0;
-}
-
-.main-navigation ul ul li:hover > ul,
-.main-navigation ul ul li.focus > ul {
-	left: 100%;
-}
-
-.main-navigation ul ul a {
-	width: 200px;
-}
-
-.main-navigation ul li:hover > ul,
-.main-navigation ul li.focus > ul {
-	left: auto;
-}
-
-.main-navigation li {
-	float: left;
-	position: relative;
-}
-
-.main-navigation a {
-	display: block;
-	text-decoration: none;
-}
-
-/* Small menu. */
-.menu-toggle,
-.main-navigation.toggled ul {
-	display: block;
-}
-
-@media screen and (min-width: 37.5em) {
-	.menu-toggle {
-		display: none;
-	}
-	.main-navigation ul {
-		display: block;
-	}
-}
-
-@media (min-width: 766px) {
-	.navbar-inverse {
-		display: block;
-	}
-}
-
-.comment-navigation .nav-previous,
-.posts-navigation .nav-previous,
-.post-navigation .nav-previous {
-	float: left;
-	width: 50%;
-}
-
-.comment-navigation .nav-next,
-.posts-navigation .nav-next,
-.post-navigation .nav-next {
-	float: right;
-	text-align: right;
-	width: 50%;
-}
-
 .navbar-inverse {
 	border-radius: 0;
 }
@@ -629,6 +550,13 @@ footer.entry-footer {
 
 .entry-content {
 	padding: 2em;
+}
+
+.title {
+	font-size: 2em;
+	padding: 1rem;
+	margin: 0 0 0 40px;
+	text-align: center;
 }
 
 /*--------------------------------------------------------------
@@ -739,10 +667,6 @@ footer.entry-footer {
 --------------------------------------------------------------*/
 .sticky {
 	display: block;
-}
-
-.hentry {
-	margin: 0 0 1.5em;
 }
 
 .updated:not(.published) {
@@ -919,6 +843,7 @@ object {
 
 body {
 	margin: 0;
+	transition: all ease-in-out 0.3s;
 }
 
 .active {
@@ -942,8 +867,9 @@ body {
 	width: 100%;
 	padding: 1.1em;
 	color: white;
-	background-color: #101010;
+	background-color: #181319;
 	text-align: center;
+	display: inline-block;
 }
 
 ul#menu-social-media {
@@ -963,6 +889,113 @@ table {
 
 table th {
 	text-align: left;
+}
+
+.well {
+	min-height: 200px;
+}
+
+.thumb img {
+	display: block;
+	height: auto;
+	width: 300px;
+	margin: 0 auto;
+}
+
+.trending-right {
+	padding: 40px 10px 80px;
+}
+
+input.wpcf7-form-control.wpcf7-submit {
+	height: 4rem;
+	width: 21rem;
+}
+
+form.wpcf7-form {
+	text-align: center;
+}
+
+body.login.login-action-login.wp-core-ui.locale-en-us {
+	background: #d00034;
+}
+
+i.fa {
+	text-align: center;
+	margin: 0 auto;
+	/* height: 1rem; */
+	font-size: 5em;
+	position: relative;
+	left: 45%;
+}
+
+i.fa:hover {
+	cursor: pointer;
+}
+
+.fa-twitter-square {
+	color: #00c9ff !important;
+}
+
+.fa-facebook-official {
+	color: #49499e;
+}
+
+.center {
+	text-align: center;
+}
+
+.schoolLogo {
+	height: 100px;
+	width: auto;
+}
+
+p.sig {
+	margin: 0;
+}
+
+section.error-404.not-found {
+	/* height: 100%; */
+	/* width: 100%; */
+	/* background-color: red; */
+	padding: 30px;
+}
+
+.wpcm-row {
+	min-height: 200px;
+}
+
+.wpcm-profile-image {
+	margin: 1em !important;
+}
+
+.card-1 {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card-1:hover {
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+table {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.wpcf7-form {
+	/* min-height: 783px; */
+	padding: 1em;
+	background-color: rgba(250, 249, 249, 0.5);
+	max-width: 60%;
+	margin: auto;
+	margin-top: 3em;
+	margin-bottom: 3em;
+	border-radius: 1em;
+	box-shadow: 0 3px 3.5px rgba(0, 0, 0, 0.25), 0 2.5px 21px rgba(0, 0, 0, 0.22);
+	border: 0.5px solid black;
+}
+
+.wpcf7-form input {
+	width: 100%;
 }
 
 /*# sourceMappingURL=../esports-club-theme/sass/maps/style.css.map */

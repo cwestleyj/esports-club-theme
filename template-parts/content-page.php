@@ -34,7 +34,7 @@
 					sprintf(
 						wp_kses(
 							/* translators: %s: Name of current post. Only visible to screen readers */
-							__( 'Edit <span class="screen-reader-text">%s</span>', 'esports-club-theme' ),
+							__( 'Edit this page <span class="screen-reader-text">%s</span>', 'esports-club-theme' ),
 							array(
 								'span' => array(
 									'class' => array(),
@@ -47,7 +47,7 @@
 					'</span>'
 				);
 			?>
-				<p> 
+				<p>
 		</footer><!-- .entry-footer -->
 	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->

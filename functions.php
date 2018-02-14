@@ -89,7 +89,18 @@ if ( ! function_exists( 'esports_club_theme_setup' ) ) :
 endif;
 add_action( 'after_setup_theme', 'esports_club_theme_setup' );
 
+function school_customize_register( $wp_customize ) {
+    $wp_customize->add_setting( 'school_logo' ); // Add setting for logo uploader
 
+    // Add control for logo uploader (actual uploader)
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'School_logo', array(
+        'label'    => __( 'Upload Your School Logo (replaces text)', 'School' ),
+        'section'  => 'title_tagline',
+        'settings' => 'school_logo',
+        'class' => '.schoolLogo'
+    ) ) );
+}
+add_action( 'customize_register', 'school_customize_register' );
 
 /**
  * Add preconnect for Google Fonts. Taken from 2017 theme
@@ -226,47 +237,37 @@ require_once get_template_directory() . '/wp-bootstrap-navwalker.php';
 
 
 // Add new sports to plugin hook
-function custom_add_new_sport( $sport ) {
-	$sport['Overwatch'] = array(
-		'name' => __( 'Overwatch', 'esports-club-theme' ),
-		'terms' => array(
-			'wpcm_position' => array(
-				array(
-					'name' => 'Tank',
-					'slug' => 'tank',
-				),
-				array(
-					'name' => 'Support',
-					'slug' => 'support',
-				),
-				array(
-					'name' => 'Core DPS',
-					'slug' => 'core-dps',
-				),
-				array(
-					'name' => 'Flex DPS',
-					'slug' => 'flex-dps',
-				),
-			)
-		),
-	'stats_labels' => array(
-		'SR' => array(
-			'name' => __( 'SR Ranking', 'esports-club-theme' ),
-			'label' => _x( 'SR', '', 'esports-club-theme' ),
-		),
-		'Favorite Hero' => array(
-			'name' => __( 'Fav Hero', 'esports-club-theme' ),
-			'label' => _x( 'Fav Hero', 'Hero', 'esports-club-theme' ),
-		),
-
-	),
-
-);
+// function custom_add_new_sport( $sport ) {
+// 	$sport['Overwatch'] = array(
+// 		'name' => __( 'Overwatch', 'esports-club-theme' ),
+// 		'terms' => array(
+// 			'wpcm_position' => array(
+// 				array(
+// 					'name' => 'Tank',
+// 					'slug' => 'tank',
+// 				),
+// 				array(
+// 					'name' => 'Support',
+// 					'slug' => 'support',
+// 				),
+// 				array(
+// 					'name' => 'Core DPS',
+// 					'slug' => 'core-dps',
+// 				),
+// 				array(
+// 					'name' => 'Flex DPS',
+// 					'slug' => 'flex-dps',
+// 				),
+// 			)
+// 		)
+//   ),
+//
+// 	return $sport;
+// }
+// );
+// add_filter( 'wpcm_sports', 'custom_add_new_sport', 10, 1 );
 
 
-	return $sport;
-}
-add_filter( 'wpcm_sports', 'custom_add_new_sport', 10, 1 );
 
 // add login to nav
 add_filter('wp_nav_menu_items', 'add_login_logout_link', 10, 2);
@@ -317,4 +318,71 @@ function display_images_from_media_library() {
 
     return $html;
 
+}
+
+// Replace the wp-login page logo with your own
+
+function my_login_logo() { ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/img/ghlogo.png);
+		height:75px;
+		width:auto;
+		background-size: 105px;
+		background-repeat: no-repeat;
+        	padding-bottom: 30px;
+        }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
+
+function my_school_logo() { ?>
+    <style type="text/css">
+        .schoolLogo{
+            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/img/soic-logo.jpg);
+		height:75px;
+		width:auto;
+		background-size: 105px;
+		background-repeat: no-repeat;
+        	padding-bottom: 30px;
+        }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'my_school_logo' );
+
+
+// font awesome
+//enqueues our external font awesome stylesheet
+function enqueue_our_required_stylesheets(){
+	wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+}
+add_action('wp_enqueue_scripts','enqueue_our_required_stylesheets');
+
+
+// add hook for ordering events pro
+
+add_action( 'pre_get_posts', 'tribe_post_date_ordering', 51 );
+
+function tribe_post_date_ordering( $query ) {
+	if ( ! empty( $query->tribe_is_multi_posttype ) ) {
+		remove_filter( 'posts_fields', array( 'Tribe__Events__Query', 'multi_type_posts_fields' ) );
+		$query->set( 'order', 'DESC' );
+	}
+}
+
+// declare wp club manager support
+add_theme_support( 'wpclubmanager' );
+
+// unhook wp club add_theme_support
+remove_action( 'wpclubmanager_before_main_content', 'wpclubmanager_output_content_wrapper', 10);
+remove_action( 'wpclubmanager_after_main_content', 'wpclubmanager_output_content_wrapper_end', 10);
+
+
+add_action('wpclubmanager_before_main_content', 'my_theme_wrapper_start', 10);
+add_action('wpclubmanager_after_main_content', 'my_theme_wrapper_end', 10);
+function my_theme_wrapper_start() {
+	echo '<section id="main_wpclub_template">';
+}
+function my_theme_wrapper_end() {
+	echo '</section>';
 }
